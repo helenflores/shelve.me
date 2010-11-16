@@ -46,3 +46,4 @@ group :test do
   gem 'launchy'
 end
 
+gem 'devise'
