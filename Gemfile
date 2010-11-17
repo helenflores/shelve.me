@@ -35,6 +35,7 @@ group :development, :test do
   gem 'redgreen'
   gem 'test_notifier'
   gem 'annotate-models', '~> 1.0.4'
+  gem 'web-app-theme', '>= 0.6.2'
 end
 
 gem 'jquery-rails', '~> 0.2.5'
@@ -47,3 +48,4 @@ group :test do
 end
 
 gem 'devise'
+

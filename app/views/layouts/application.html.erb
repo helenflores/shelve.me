@@ -1,27 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ShelveMe</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <title>Shelve</title>
+  <%= stylesheet_link_tag "web-app-theme/base", "web-app-theme/themes/default/style", "web-app-theme/override", :cache => true %>
+  <%= javascript_include_tag :defaults, :cache => true %>
   <%= csrf_meta_tag %>
 </head>
 <body>
- <header>
-      <h1><%=link_to "ShelveMe", root_path%></h1>
-      <nav>
-        <%unless user_signed_in?%>
+  <div id="container">
+    <div id="header">
+      <h1><a href="/">Shelve.me</a></h1>
+      <div id="user-navigation">
+        <ul class="wat-cf">
+	  <%unless user_signed_in?%>
             <%=link_to "Login", new_user_session_path%>
             <%=link_to "Register", new_user_registration_path%>
           <%else%>
-            <%=current_user.username%>
+            <li style="color: white"><%=current_user.username%></li>
             <%= link_to "Logout", destroy_user_session_path %>
-        <%end%>  
-        </nav>
-      </header>
+        <%end%> 
+        </ul>
+      </div>
       <p class="notice"><%= flash[:notice] %></p>
       <p class="error"><%= flash[:error] %></p>
-<%= yield %>
-
+      <div id="main-navigation">
+        <ul class="wat-cf"></ul>
+      </div>
+    </div>    
+    <div id="wrapper" class="wat-cf">
+      <div class="flash">
+        <% flash.each do |type, message| -%>
+          <div class="message <%= type %>">
+            <p><%= message %></p>
+          </div>
+        <% end -%>
+      </div>
+      <div id="main">
+        <%= yield %>
+        <div id="footer">
+          <div class="block">
+            <p>Copyright &copy; <%= Time.now.year %> Shelve.me</p>
+          </div>      
+        </div>
+      </div>
+      <div id="sidebar">
+        <%= yield :sidebar %>
+      </div>
+    </div>    
+  </div>
 </body>
 </html>

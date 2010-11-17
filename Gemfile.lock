@@ -126,6 +126,7 @@ GEM
     tzinfo (0.3.23)
     warden (0.10.7)
       rack (>= 1.0.0)
+    web-app-theme (0.6.2)
     xpath (0.1.2)
       nokogiri (~> 1.3)
 
@@ -146,3 +147,4 @@ DEPENDENCIES
   redgreen
   sqlite3-ruby
   test_notifier
+  web-app-theme (>= 0.6.2)
