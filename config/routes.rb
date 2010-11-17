@@ -1,5 +1,15 @@
 ShelveMe::Application.routes.draw do
 
+  get "books/index"
+
+  get "books/show"
+
+  get "books/create"
+
+  get "books/new"
+
+  get "books/search"
+
 # resources :books only [:index, :show, :new, :create] do
 	#:search
 # end
