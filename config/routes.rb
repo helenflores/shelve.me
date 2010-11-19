@@ -20,8 +20,7 @@ ShelveMe::Application.routes.draw do
  resources :reviews
  end
 
- root :to=>"static#index"
-
+ root :to=>"books#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
