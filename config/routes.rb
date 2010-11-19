@@ -1,9 +1,25 @@
 ShelveMe::Application.routes.draw do
 
+  get "reviews/index"
+
+  get "reviews/show"
+
+  get "reviews/new"
+
+  get "reviews/create"
+
+  get "reviews/edit"
+
+  get "reviews/update"
+
+  get "reviews/destroy"
+
  devise_for :users
  resources(:books, :only => [:index, :show, :new, :create]) do
   get 'search', :on => :collection
+ resources :reviews
  end
+
  root :to=>"static#index"
 
   # The priority is based upon order of creation:
