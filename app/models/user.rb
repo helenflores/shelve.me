@@ -11,5 +11,21 @@ validates_presence_of :username
 validates_uniqueness_of :username
 
 has_many :reviews
+has_and_belongs_to_many :books
+
+def has_read?(book)
+	#book.readers.exists? self
+	self.book.exists? book
+end
+
+def read(book)
+	user.books<<book
+	#book.readers<<self
+end
+
+def forget(book)
+	#self.books.delete
+	book.readers.delete self	
+end
 
 end
