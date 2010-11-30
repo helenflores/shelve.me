@@ -1,14 +1,13 @@
 ShelveMe::Application.routes.draw do
 
-  get "users/show"
-
  devise_for :users, :path=>"auth" #cambiarle el prefijo a devise
  resources(:books, :only => [:index, :show, :new, :create]) do
-  get 'search', :on => :collection
- resources :reviews
+   get 'search', :on => :collection
+   resources :reviews
+ end
+
  resources :users, :only=>[:show] do
 	resources :book, :only=>[:update, :destroy]
- end
  end
 
  root :to=>"books#index"

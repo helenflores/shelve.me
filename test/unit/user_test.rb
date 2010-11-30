@@ -46,24 +46,28 @@ class UserTest < ActiveSupport::TestCase
     #cómo usarla: http://guides.rubyonrails.org/association_basics.html#has_and_belongs_to_many-association-reference
     
     assert_difference("user.books.count", 2) do
-      user.books << u
-      user.books << v
+      user.books u
+      user.books v
     end
 
-    assert user.books.exists? :title => u.title, :author=> u.author
-    assert user.books.exists? :title => v.title, :author=> v.author
+    assert user.respond_to? :has_read?
+    assert user.has_read? u
+    assert user.has_read? v
   end
 
   test "books are deleted" do 
     user= User.create! :username => "ecioran", :email=>"rumanian@crazies.com", :password=>"demiurgo" 
     
     assert_difference("user.books.count") do
-      user.books << books(:one)
+      user.read books(:one)
     end
 
+    assert user.respond_to? :forget
     assert_difference("user.books.count", -1) do 
-      user.books.delete books(:one)
+      user.forget books(:one)
     end
+
+    assert_equal false, user.has_read?(books(:one))
     
   end
 end

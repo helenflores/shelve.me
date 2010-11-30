@@ -2,6 +2,12 @@ require 'test_helper'
 
 class BookTest < ActiveSupport::TestCase
   # Replace this with your real tests.
+ setup do
+    @book = books :one
+    @book.cover = File.new Rails.root + "test/fixtures/images/rails.png"
+    @realbook = Book.create(:author=>"Ayn Rand", :title=>"The Fountainhead")
+  end
+
   test "book gets created" do 
     b = Book.new(:author=>"E.A. Poe", :title=>"The imp of the perverse", :description=>"essay on the human condition")
     assert b.save
@@ -111,6 +117,26 @@ class BookTest < ActiveSupport::TestCase
       book.readers.delete users(:one)
     end
     
+  end
+
+  test "has attachment field" do 
+    assert @book.respond_to? :cover
+    assert_equal "rails.png", @book.cover.original_filename
+    #le quitamos el querystring
+    assert_match "/system/covers/#{@book.id}/original/rails.png", @book.cover.url.split('?')[0]
+    #más métodos: @book.cover.methods.sort
+  end
+
+  test "has twitter feed" do 
+    assert @realbook.respond_to? :mentions_in
+    assert_not_nil @realbook.mentions_in :twitter
+    assert_kind_of SocialFeed::Entry, @realbook.mentions_in(:twitter).first
+  end
+  
+  test "has facebook feed" do 
+    assert @realbook.respond_to? :mentions_in
+    assert_not_nil @realbook.mentions_in :facebook
+    assert_kind_of SocialFeed::Entry, @realbook.mentions_in(:facebook).first
   end
 
 end

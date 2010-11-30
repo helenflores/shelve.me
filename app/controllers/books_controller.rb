@@ -26,18 +26,17 @@ class BooksController < ApplicationController
   end
 
   def update
-	book = Book.find params[:id]
-	user = User.find params[:user_id]
-	User.read book	
+	@book = Book.find params[:id]
+	@user = User.find params[:user_id]
+	@user.read book
+	redirect_to @book
   end
+
   def destroy
-        book = Book.find params[:id]
-        user = User.find params[:user_id]
-        User.forget book
+        @book = Book.find params[:id]
+        @user = User.find params[:user_id]
+        @user.forget @book
+	redirect_to @book
   end
-
-
-
-
 
 end

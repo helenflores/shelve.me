@@ -10,4 +10,8 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  FakeWeb.register_uri(:get, "http://search.twitter.com/search.json?q=the+fountainhead", 
+                       :body=>File.read(File.join(Rails.root, "test", "fixtures", "fakeweb", "twitter.json"))) 
+  FakeWeb.register_uri(:get, "https://graph.facebook.com/search?q=the+fountainhead&type=post",
+                       :body=>File.read(File.join(Rails.root, "test", "fixtures", "fakeweb", "facebook.json")))
 end

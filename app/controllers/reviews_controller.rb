@@ -28,11 +28,13 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-	@review = current_user.reviews.find params[:id]
+	#@review = current_user.reviews.find params[:id]
 	@book = @review.book
   end
 
   def update
+	@review = current_user.reviews.find params[:id]
+	@book = @review.book
 	if @review.update_attributes params[:review]
 		redirect_to book_review_path(@book, @review)
 	else

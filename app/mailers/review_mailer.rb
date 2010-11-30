@@ -9,9 +9,7 @@ class ReviewMailer < ActionMailer::Base
   def new_review_email (:book, :review)
 	@book = review.book
 	@review = review
-	@greeting = "Hi"
-
-    mail (:to => @book.readers.collect{|r| r.email},
+	mail (:to => @book.readers.collect{|r| r.email},
 	:subject=>"New review for #{@book.title}")
   end
 end
