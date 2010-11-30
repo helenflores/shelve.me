@@ -6,10 +6,10 @@ class ReviewMailer < ActionMailer::Base
   #
   #   en.review_mailer.new_review_email.subject
   #
-  def new_review_email (:book, :review)
+  def new_review_email (review)
 	@book = review.book
 	@review = review
-	mail (:to => @book.readers.collect{|r| r.email},
-	:subject=>"New review for #{@book.title}")
+	mail :to => @book.readers.collect{|r| r.email},
+	     :subject=>"New review for #{@book.title}"
   end
 end
